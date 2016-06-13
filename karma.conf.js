@@ -8,10 +8,10 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
     autoWatch: false,
     files: [
-      './build/bundle.js'
+      'build/bundle.js'
     ],
     preprocessors: {
-      './build/bundle.js': ['coverage']
+      'build/bundle.js': ['coverage']
     },
     client: {
       // log console output in our test console
@@ -31,7 +31,7 @@ module.exports = function(config) {
 
     coverageReporter: {
       type : 'json',
-      dir: 'coverageJson/',
+      dir: 'coverage',
       subdir: '.',
       file: 'coverage-final.json',
       includeAllSources: true

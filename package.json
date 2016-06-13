@@ -25,7 +25,9 @@
   },
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server ./app.ts"
+    "start": "webpack-dev-server ./app.ts",
+    "test": "karma start",
+    "coverage": "./node_modules/.bin/remap-istanbul -i coverage/coverage-final.json -o report -t html"
   },
   "author": "",
   "license": "ISC"
