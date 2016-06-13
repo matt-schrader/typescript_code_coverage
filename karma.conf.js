@@ -6,26 +6,20 @@ module.exports = function(config) {
     // Add any browsers here
     browsers: ['Chrome'],
     frameworks: ['jasmine'],
-
-    // The entry point for our test suite
-    //basePath: 'src',
     autoWatch: false,
-    files: ['spec.bundle.ts'],
+    files: [
+      './build/bundle.js'
+    ],
     preprocessors: {
-      // Run this through webpack, and enable inline sourcemaps
-      'spec.bundle.ts': ['webpack', 'sourcemap'],
-      '!(*spec)+(.ts)': ['sourcemap', 'coverage'],
-      '!(*spec)+(.js)': ['sourcemap', 'coverage']
+      './build/bundle.js': ['coverage']
     },
-
-    webpack: webpackConfig.test,
     client: {
       // log console output in our test console
       captureConsole: true
     },
 
-    reporters: ['dots', 'progress', 'coverage'],
-    singleRun: true, // exit after tests have completed
+    reporters: ['progress', 'coverage'],
+    singleRun: true,
 
     webpackMiddleware: {
       noInfo: true
@@ -38,19 +32,9 @@ module.exports = function(config) {
     coverageReporter: {
       type : 'json',
       dir: 'coverageJson/',
-    subdir: '.',
+      subdir: '.',
       file: 'coverage-final.json',
-      includeAllSources: false
-    },
-
-    remapIstanbulReporter: {
-      src: 'coverageJson/coverage-final.json',
-      reports: {
-        lcovonly: 'remap/coverage/lcov.info',
-        html: 'remap/html/report'
-      },
-      timeoutNotCreated: 1000, // default value
-      timeoutNoMoreFiles: 1000 // default value
+      includeAllSources: true
     }
   });
 };
