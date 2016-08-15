@@ -1,5 +1,15 @@
-function greet(name: string) {
-  return 'Hello ManJoo ' + name
+const greeter = {
+
+    greet: function (name: string) {
+        return this.greeting(null) + ' ManJoo ' + name 
+    },
+
+    greeting: function(hello: string){
+        if (hello){
+            return hello;
+        }
+        return "HI";
+    }
 }
 
-export = greet;
+export = greeter;
