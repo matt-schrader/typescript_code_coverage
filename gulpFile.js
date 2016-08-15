@@ -6,7 +6,7 @@ var karma = require('karma').Server;
 var paths = {
     entry: __dirname + '/src/app.ts',
     dest: 'build'
-}
+};
 
 /**
  * Default task to build and test the application
