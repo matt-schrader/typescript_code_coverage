@@ -1,5 +1,6 @@
-import greeter = require('./greeter');
+import greeter from './greeter';
 
 (function(){
-  document.body.innerHTML= '<h1>' + greeter.greet('world') + '</h1>';
+  var myGreeter = new greeter();
+  document.body.innerHTML= '<h1>' + myGreeter.greet('world') + '</h1>';
 })();
