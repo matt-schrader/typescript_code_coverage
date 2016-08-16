@@ -2,6 +2,7 @@ var gulp    = require('gulp');
 var sync    = require('run-sequence');
 var webpack = require('webpack-stream');
 var karma = require('karma').Server;
+var remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
 
 var paths = {
     entry: __dirname + '/src/app.ts',
@@ -12,7 +13,7 @@ var paths = {
  * Default task to build and test the application
  */
 gulp.task('default', function(done){
-    sync('build', 'test', done);
+    sync('build', 'test', 'coverage', done);
 });
 
 /**
@@ -38,4 +39,16 @@ gulp.task('test', function(done){
         }
         done();
     }).start();
+});
+
+gulp.task('coverage', function() {
+  return gulp.src('coverage/Chrome 52.0.2743 (Mac OS X 10.11.5)/coverage-final.json')
+      .pipe(remapIstanbul({
+        reports: {
+          'json': 'coverage.json',
+          'html': 'html-report'
+        },
+        exclude: 'spec.bundle.ts',
+        fail: true
+      }));
 });

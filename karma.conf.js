@@ -3,22 +3,16 @@ module.exports = function(config) {
         basePath: '.',
 
         frameworks: ['jasmine'],
+        preprocessors: {
+            'spec.bundle.ts': ['webpack', 'sourcemap']
+        },
+        reporters: ['progress', 'coverage'],
 
         files: [
-            {pattern: 'spec.bundle.ts', watched: false},
-            {pattern: 'build/bundle.js', included: false, watched: true},
+            {pattern: 'spec.bundle.ts', watched: false}
         ],
 
-        preprocessors: {
-            'spec.bundle.ts': ['webpack'],
-            'build/bundle.js' : ['coverage']
-        },
-
         webpack: {
-            output: {
-                filename: 'test.js',
-                path: 'tmp'
-            },
             devtool: 'inline-source-map',
             resolve: {
                 extensions: ['', '.js', '.ts']
@@ -29,12 +23,16 @@ module.exports = function(config) {
                 ],
                 postLoaders: [
                     {
-                        test: /^((?!\.spec\.ts).)*.ts$/,
+                        test: /\.ts$/,
                         exclude: /(node_modules|bower_components)/,
                         loader: 'istanbul-instrumenter'
                     }
                 ]
             }
+        },
+
+        webpackMiddleware: {
+          noInfo: true
         },
 
         webpackServer: {
@@ -43,7 +41,19 @@ module.exports = function(config) {
 
         exclude: [],
 
-        reporters: ['progress', 'dots', 'coverage'],
+        coverageReporter: {
+          type : 'html',
+          dir: 'coverage',
+          subdir: '.'
+        },
+
+        remapIstanbulReporter: {
+          coverage: 'coverage/coverage-final.json',
+          reports: {
+            lcovonly: 'path/to/output/coverage/lcov.info',
+            html: 'path/to/output/html/report'
+          }
+        },
 
         port: 9876,
 
@@ -54,11 +64,6 @@ module.exports = function(config) {
         browsers: [
             'Chrome'
         ],
-
-        coverageReporter: {
-                type: 'html',
-                dir: 'coverage/'
-        },
 
         singleRun: false
     });
