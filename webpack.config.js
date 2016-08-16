@@ -2,14 +2,14 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './src/app.ts',
+  entry: './src/greeter.spec.ts',
 
   output: {
     filename: 'bundle.js'
   },
   devtool: 'source-map',
   resolve: {
-    extensions: ['', '.ts', '.js']
+    extensions: ['', '.ts', '.spec.ts']
   },
   module: {
     loaders: [

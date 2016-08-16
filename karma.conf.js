@@ -4,32 +4,13 @@ module.exports = function(config) {
 
         frameworks: ['jasmine'],
         preprocessors: {
-            'spec.bundle.ts': ['webpack', 'sourcemap']
+            'build/bundle.js': ['coverage']
         },
         reporters: ['progress', 'coverage'],
 
         files: [
-            {pattern: 'spec.bundle.ts', watched: false}
+            {pattern: 'build/bundle.js', watched: false}
         ],
-
-        webpack: {
-            devtool: 'inline-source-map',
-            resolve: {
-                extensions: ['', '.js', '.ts']
-            },
-            module: {
-                loaders: [
-                    {test: /\.ts$/, loader: 'ts'},
-                ],
-                postLoaders: [
-                    {
-                        test: /\.ts$/,
-                        exclude: /(node_modules|bower_components)/,
-                        loader: 'istanbul-instrumenter'
-                    }
-                ]
-            }
-        },
 
         webpackMiddleware: {
           noInfo: true
@@ -42,17 +23,10 @@ module.exports = function(config) {
         exclude: [],
 
         coverageReporter: {
-          type : 'html',
+          type : 'json',
           dir: 'coverage',
-          subdir: '.'
-        },
-
-        remapIstanbulReporter: {
-          coverage: 'coverage/coverage-final.json',
-          reports: {
-            lcovonly: 'path/to/output/coverage/lcov.info',
-            html: 'path/to/output/html/report'
-          }
+          subdir: '.',
+          file: 'coverage-final.json'
         },
 
         port: 9876,
