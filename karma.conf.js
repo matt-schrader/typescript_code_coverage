@@ -4,12 +4,12 @@ module.exports = function(config) {
 
         frameworks: ['jasmine'],
         preprocessors: {
-            'build/bundle.js': ['coverage']
+            'build-test/bundle.js': ['coverage']
         },
         reporters: ['progress', 'coverage'],
 
         files: [
-            {pattern: 'build/bundle.js', watched: false}
+            {pattern: 'build-test/bundle.js', watched: false}
         ],
 
         webpackMiddleware: {

@@ -1,4 +1,4 @@
-import greeter from './greeter';
+import greeter from './greeter/greeter';
 
 (function(){
   var myGreeter = new greeter();

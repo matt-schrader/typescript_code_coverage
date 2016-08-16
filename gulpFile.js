@@ -6,7 +6,10 @@ var remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
 
 var paths = {
     entry: __dirname + '/src/app.ts',
-    dest: 'build'
+    dest: 'build',
+
+    testentry: './src/spec.bundle.ts',
+    testdest: 'build-test'
 };
 
 /**
@@ -14,6 +17,10 @@ var paths = {
  */
 gulp.task('default', function(done){
     sync('build', 'test', 'coverage', done);
+});
+
+gulp.task('test', function(done) {
+  sync('test-build', 'test-run', 'coverage', done);
 });
 
 /**
@@ -25,10 +32,16 @@ gulp.task('build', function(){
         .pipe(gulp.dest(paths.dest));
 });
 
+gulp.task('test-build', function() {
+  return gulp.src(paths.testentry)
+      .pipe(webpack(require('./webpack.config')))
+      .pipe(gulp.dest(paths.testdest));
+});
+
 /**
  * Test Task
  */
-gulp.task('test', function(done){
+gulp.task('test-run', function(done) {
     new karma({
         configFile: __dirname + '/karma.conf.js',
         singleRun: true
@@ -42,10 +55,10 @@ gulp.task('test', function(done){
 });
 
 gulp.task('coverage', function() {
-  return gulp.src('coverage/Chrome 52.0.2743 (Mac OS X 10.11.5)/coverage-final.json')
+  return gulp.src('coverage/coverage-final.json')
       .pipe(remapIstanbul({
         reports: {
-          'json': 'coverage.json',
+          'json': 'coverage/istanbul-coverage.json',
           'html': 'html-report'
         },
         exclude: 'spec.bundle.ts',

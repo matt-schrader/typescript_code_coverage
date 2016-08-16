@@ -3,4 +3,7 @@ typings
 build
 coverage
 report
-src/*.js*
+src/**/*.js*
+test/*.js*
+build-test
+html-report
