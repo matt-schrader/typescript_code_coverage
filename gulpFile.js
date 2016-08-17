@@ -34,7 +34,7 @@ gulp.task('build', function(){
 
 gulp.task('test-build', function() {
   return gulp.src(paths.testentry)
-      .pipe(webpack(require('./webpack.config')))
+      .pipe(webpack(require('./webpack.test.config')))
       .pipe(gulp.dest(paths.testdest));
 });
 
