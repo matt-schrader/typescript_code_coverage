@@ -55,10 +55,12 @@ gulp.task('test-run', function(done) {
 });
 
 gulp.task('coverage', function() {
-  return gulp.src('coverage/coverage-final.json')
+  return gulp.src(paths.testdest + '/coverage/coverage-final.json')
       .pipe(remapIstanbul({
+        basePath: __dirname + '/src',
+        output: 'coverage',
         reports: {
-          'json': 'coverage/istanbul-coverage.json',
+          'json': paths.testdest + '/coverage/istanbul-coverage.json',
           'html': 'html-report'
         },
         exclude: 'spec.bundle.ts',

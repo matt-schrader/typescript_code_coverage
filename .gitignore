@@ -7,3 +7,4 @@ src/**/*.js*
 test/*.js*
 build-test
 html-report
+.vscode

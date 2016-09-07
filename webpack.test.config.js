@@ -2,7 +2,8 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './src/spec.bundle.ts',
+  context: __dirname + "/src",
+  entry: './spec.bundle.ts',
   output: {
     filename: 'bundle.js'
   },

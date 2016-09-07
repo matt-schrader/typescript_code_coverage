@@ -1,15 +1,15 @@
 module.exports = function(config) {
     config.set({
-        basePath: '.',
+        basePath: 'build-test/',
 
         frameworks: ['jasmine'],
         preprocessors: {
-            'build-test/bundle.js': ['coverage']
+            'bundle.js': ['coverage']
         },
         reporters: ['progress', 'coverage'],
 
         files: [
-            {pattern: 'build-test/bundle.js', watched: false}
+            {pattern: 'bundle.js', watched: false}
         ],
 
         webpackMiddleware: {
@@ -23,10 +23,13 @@ module.exports = function(config) {
         exclude: [],
 
         coverageReporter: {
-          type : 'json',
-          dir: 'coverage',
-          subdir: '.',
-          file: 'coverage-final.json'
+          instrumenterOptions: {
+            istanbul: {noCompact: true}
+          },
+          dir: 'coverage/',
+          reporters: [
+            { type: 'json', subdir: '.', file: 'coverage-final.json' }
+          ]
         },
 
         port: 9876,
