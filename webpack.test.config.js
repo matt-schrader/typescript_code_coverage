@@ -5,7 +5,8 @@ module.exports = {
   context: __dirname + "/src",
   entry: './spec.bundle.ts',
   output: {
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    devtoolModuleFilenameTemplate: '[resource-path]'
   },
   devtool: 'source-map',
   resolve: {
